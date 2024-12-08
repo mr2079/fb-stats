@@ -1,22 +1,21 @@
-import { BelongsToMany, Column, Table } from "sequelize-typescript";
+import { Column, Entity, ManyToMany } from "typeorm";
 import BaseEntity from "./base.entity";
 import Team from "./team.entity";
-import CompetitionTeam from "./competition-team.entity";
 
-@Table({ tableName: "competitions" })
+@Entity()
 export default class Competition extends BaseEntity {
-    @Column
+    @Column()
     fetchId: string;
 
-    @Column
+    @Column()
     name: string;
 
-    @Column
+    @Column()
     title: string;
 
-    @Column
+    @Column()
     logo: string;
 
-    @BelongsToMany(() => Team, () => CompetitionTeam)
-    teams: Array<Team & { CompetitionTeam: CompetitionTeam }>;
+    @ManyToMany(() => Team, (team) => team.competitions)
+    teams: Team[];
 }

@@ -1,7 +1,6 @@
-import { Column, Model, PrimaryKey } from "sequelize-typescript";
+import { PrimaryGeneratedColumn } from "typeorm";
 
-export default class BaseEntity extends Model {
-    @PrimaryKey
-    @Column
+export default class BaseEntity {
+    @PrimaryGeneratedColumn()
     id : number;
 }
