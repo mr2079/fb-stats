@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import InitializeController from './initialize.controller';
+import InitializeController from './api/controllers/initialize.controller';
 import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from './infrastructure/data/typeorm.module';
+import CompetitionController from './api/controllers/competition.controller';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
@@ -10,10 +12,12 @@ import { TypeOrmModule } from './infrastructure/data/typeorm.module';
       envFilePath: [ ".env.development", ".env.production" ]
     }),
     TypeOrmModule,
-    HttpModule
+    HttpModule,
+    CqrsModule
   ],
   controllers: [
-    InitializeController
+    InitializeController,
+    CompetitionController
   ]
 })
 export class AppModule {}

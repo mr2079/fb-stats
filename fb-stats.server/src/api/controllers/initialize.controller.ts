@@ -1,9 +1,9 @@
 import { HttpService } from "@nestjs/axios";
 import { Controller, Get } from "@nestjs/common";
-import CompetitionInfo from "./initialize.interface";
-import Competition from "./domain/entities/competition.entity";
+import CompetitionInfo from "../models/initialize.interface";
+import Competition from "../../domain/entities/competition.entity";
 import { DataSource, Repository } from "typeorm";
-import Team from "./domain/entities/team.entity";
+import Team from "../../domain/entities/team.entity";
 
 @Controller("initialize")
 export default class InitializeController {
