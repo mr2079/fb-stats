@@ -1,8 +1,9 @@
 import { HttpService } from "@nestjs/axios";
 import { Controller, Get } from "@nestjs/common";
 import CompetitionInfo from "./initialize.interface";
-import appDataSource from "./infrastructure/data/AppDataSource";
 import Competition from "./domain/entities/competition.entity";
+import { DataSource, Repository } from "typeorm";
+import Team from "./domain/entities/team.entity";
 
 @Controller("initialize")
 export default class InitializeController {
@@ -18,22 +19,48 @@ export default class InitializeController {
         uefaEuropaLeague: "f31e4219-dc58-4740-9b26-f3fafac3460f",
     }
 
-    constructor(private readonly _http: HttpService) { }
+    private readonly _competitionRepository : Repository<Competition>;
+    private readonly _teamRepository : Repository<Team>;
+
+    constructor(
+        private readonly _appDataSource: DataSource,
+        private readonly _http: HttpService) { 
+            this._competitionRepository = _appDataSource.getRepository(Competition);
+            this._teamRepository = _appDataSource.getRepository(Team);
+        }
 
     @Get()
     async initAsync() : Promise<void> {
+        const existedCompetitions = await this._competitionRepository.find();
+        if (existedCompetitions) return;
+        
         const competitionNames = Object.keys(this._competitions);
         competitionNames.forEach(async competitionName => {
             const competitionId = this._competitions[competitionName];
             this._http.get<CompetitionInfo>(`https://football360.ir/api/base/v2/competition-trends/${competitionId}/standings`)
                 .subscribe(({data: competitionInfo}) => {
-                    const competition = appDataSource.manager.create(Competition, {
+                    const competition = this._competitionRepository.create({
                         fetchId: competitionId,
                         name: competitionInfo.english_name,
                         title: competitionInfo.title,
                         logo: competitionInfo.logo
                     });
-                    appDataSource.manager.save(competition);
+                    this._competitionRepository.save(competition)
+                        .then(({ id }) => {
+                            const teams = competitionInfo
+                            .competition_trend_stages[0]
+                            .standing_table.map(st => {
+                                const team = new Team();
+                                team.competitionId = id;
+                                team.fetchId = st.team.id;
+                                team.name = st.team.english_name;
+                                team.title = st.team.title;
+                                team.logo = st.team.logo;
+                                return team;
+                            });
+                            this._teamRepository.create(teams);
+                            this._teamRepository.save(teams); 
+                        });
                 });
         });
     }

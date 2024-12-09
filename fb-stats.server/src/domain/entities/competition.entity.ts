@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 import BaseEntity from "./base.entity";
 import Team from "./team.entity";
 
@@ -16,6 +16,6 @@ export default class Competition extends BaseEntity {
     @Column()
     logo: string;
 
-    @ManyToMany(() => Team, (team) => team.competitions)
+    @OneToMany(() => Team, (team) => team.competition)
     teams: Team[];
 }

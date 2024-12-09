@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import appDataSource from './infrastructure/data/AppDataSource';
 import InitializeController from './initialize.controller';
 import { HttpModule } from '@nestjs/axios';
+import { TypeOrmModule } from './infrastructure/data/typeorm.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: [ ".env.development", ".env.production" ]
     }),
-    TypeOrmModule.forRoot(appDataSource.options),
+    TypeOrmModule,
     HttpModule
   ],
   controllers: [

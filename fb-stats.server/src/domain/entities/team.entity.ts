@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import BaseEntity from "./base.entity";
 import Competition from "./competition.entity";
 
@@ -16,7 +16,9 @@ export default class Team extends BaseEntity {
     @Column()
     logo: string;
 
-    @ManyToMany(() => Competition, (competition) => competition.teams)
-    @JoinTable()
-    competitions: Competition[]
+    @Column()
+    competitionId: number;
+
+    @ManyToOne(() => Competition, (competition) => competition.teams)
+    competition: Competition
 }
