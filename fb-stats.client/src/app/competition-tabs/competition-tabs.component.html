@@ -1,0 +1,13 @@
+@if ((competitionTabs | async) === null) 
+{
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<mat-tab-group dir="rtl">
+  @for (tab of competitionTabs | async; track tab) {
+  <mat-tab>
+    <ng-template mat-tab-label>{{ tab.label }}</ng-template>
+    
+  </mat-tab>
+  }
+</mat-tab-group>
