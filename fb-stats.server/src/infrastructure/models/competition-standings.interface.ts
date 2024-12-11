@@ -1,4 +1,4 @@
-export default interface CompetitionInfo {
+export default interface CompetitionStandings {
   id: string;
   title: string;
   english_name: string;

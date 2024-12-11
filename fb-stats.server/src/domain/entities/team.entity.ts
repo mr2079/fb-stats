@@ -1,9 +1,9 @@
 import { Column, Entity, ManyToOne } from "typeorm";
-import BaseEntity from "./base.entity";
+import AppBaseEntity from "./base.entity";
 import Competition from "./competition.entity";
 
 @Entity()
-export default class Team extends BaseEntity {
+export default class Team extends AppBaseEntity {
     @Column()
     fetchId: string;
 

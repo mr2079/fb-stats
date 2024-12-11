@@ -1,7 +1,7 @@
 import Competition from "src/domain/entities/competition.entity";
 import Team from "src/domain/entities/team.entity";
 import { DataSource } from "typeorm";
-import { UpdateSchema1733769376592 } from "../migrations/1733769376592-UpdateSchema";
+import { UpdateSchema1733919538853 } from "../migrations/1733919538853-UpdateSchema";
 
 const appDataSource = new DataSource({
     type: "postgres",
@@ -16,7 +16,7 @@ const appDataSource = new DataSource({
         Team
     ],
     migrations: [
-        UpdateSchema1733769376592
+        UpdateSchema1733919538853
     ]
 });
 

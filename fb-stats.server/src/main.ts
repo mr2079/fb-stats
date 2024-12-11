@@ -5,6 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.useLogger(["fatal", "error", "warn"]);
+
   const config = new DocumentBuilder()
     .setTitle("fb_stats API")
     .build();

@@ -1,6 +1,6 @@
-import { PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 
-export default class BaseEntity {
+export default class AppBaseEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id : number;
 }

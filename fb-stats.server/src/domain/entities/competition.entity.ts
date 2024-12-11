@@ -1,11 +1,14 @@
 import { Column, Entity, OneToMany } from "typeorm";
-import BaseEntity from "./base.entity";
+import AppBaseEntity from "./base.entity";
 import Team from "./team.entity";
 
 @Entity()
-export default class Competition extends BaseEntity {
+export default class Competition extends AppBaseEntity {
     @Column()
     fetchId: string;
+
+    @Column({ default: 0 })
+    order: number;
 
     @Column()
     name: string;
@@ -15,6 +18,9 @@ export default class Competition extends BaseEntity {
 
     @Column()
     logo: string;
+
+    @Column({ default: false })
+    isActive: boolean;
 
     @OneToMany(() => Team, (team) => team.competition)
     teams: Team[];
