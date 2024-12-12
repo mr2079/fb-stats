@@ -18,7 +18,7 @@ export default class CompetitionListQueryHandler implements IQueryHandler<Compet
         this._competitionRepository = _appDataSource.getRepository(Competition);
     }
 
-    async execute(_: CompetitionListQuery) {
+    async execute(_: CompetitionListQuery) : Promise<CompetitionListResponseDTO> {
         return this._competitionRepository.find({
             where: {
                 isActive: true

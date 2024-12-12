@@ -19,8 +19,9 @@ export default class InitializeController {
 
     @Get()
     async initAsync() : Promise<void> {
-        // const existedCompetitions = await this._competitionRepository.find();
-        // if (existedCompetitions) return;
+        const existedCompetitions = await this._competitionRepository.find();
+        if (existedCompetitions) return;
+        
         const competitionItems = await this._apiService.getCompetitionItemsAsync();
         competitionItems.data.forEach(item => {
             const competition = this._competitionRepository.create({

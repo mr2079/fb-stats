@@ -1,49 +1,33 @@
-import { Controller, Get, Param } from "@nestjs/common";
-import { QueryBus } from "@nestjs/cqrs";
-import { ApiParam } from "@nestjs/swagger";
-import CompetitionStandingsResponseDTO, { Country, Standings, Team } from "src/application/models/dtos/responses/competition-standings-response.dto";
-import IResponse from "src/application/models/dtos/responses/response.interface";
+import { Logger } from "@nestjs/common";
+import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { CompetitionErrors } from "src/application/models/errors/competition.error";
-import { CompetitionListQuery } from "src/application/queries/competitions/competition-list.handler";
-import { CompetitionStandingQuery } from "src/application/queries/competitions/competition-standing.handler";
-import { CompetitionQuery } from "src/application/queries/competitions/competition.handler";
 import Competition from "src/domain/entities/competition.entity";
+import { DataSource, Repository } from "typeorm";
 import Football360ApiService from "src/infrastructure/services/football360-api.service";
-import { DataSource } from "typeorm";
+import CompetitionStandingsResponseDTO, { Country, Standings, Team } from "src/application/models/dtos/responses/competition-standings-response.dto";
 
-@Controller("api/v1/competitions")
-export default class CompetitionController {
+export class CompetitionStandingQuery {
     constructor(
-        private readonly _queryBus : QueryBus,
+        public id: number
+    ) { }
+}
+
+@QueryHandler(CompetitionStandingQuery)
+export default class CompetitionStandingQueryHandler implements IQueryHandler<CompetitionStandingQuery> {
+    private readonly _competitionRepository: Repository<Competition>;
+    private readonly _logger = new Logger();
+
+    constructor(
         private readonly _appDataSource: DataSource,
         private readonly _apiService: Football360ApiService
-    ) { }
-
-    @Get()
-    async fetchAllAsync() : Promise<IResponse> {
-        return this._queryBus.execute(new CompetitionListQuery());
+    ) {
+        this._competitionRepository = _appDataSource.getRepository(Competition);
     }
 
-    @Get(":id")
-    @ApiParam({
-        name: "id",
-        type: "number"
-    })
-    async fetchAsync(@Param() { id }: { id: number }) : Promise<IResponse> {
-        return this._queryBus.execute(new CompetitionQuery(id));
-    }
-
-    @Get(":id/standings")
-    @ApiParam({
-        name: "id",
-        type: "number"
-    })
-    async fetchStandingsAsync(@Param() { id }: { id: number }) : Promise<IResponse> {
-        //return this._queryBus.execute(new CompetitionStandingQuery(id));
-
-        return this._appDataSource.manager.findOne(Competition, {
+    async execute(query: CompetitionStandingQuery) : Promise<CompetitionStandingsResponseDTO> {
+        return this._competitionRepository.findOne({
             where: {
-                id
+                id: query.id
             }
         })
         .then(({ fetchId }) => {
@@ -90,12 +74,12 @@ export default class CompetitionController {
                     return new CompetitionStandingsResponseDTO(true, standings);
                 })
                 .catch(err => {
-                    //this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
+                    this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
                     return new CompetitionStandingsResponseDTO(false, null, CompetitionErrors.fetchStandingsException);
                 })
         })
         .catch(err => {
-            //this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
+            this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
             return new CompetitionStandingsResponseDTO(false, null, CompetitionErrors.GetCompetitionException);
         });
     }
