@@ -7,7 +7,7 @@
   @for (tab of competitionTabs | async; track tab) {
   <mat-tab>
     <ng-template mat-tab-label>{{ tab.label }}</ng-template>
-    
+    <app-competition-standings [competitionId]="tab.id"/>
   </mat-tab>
   }
 </mat-tab-group>
