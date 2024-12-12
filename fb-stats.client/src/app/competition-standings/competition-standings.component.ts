@@ -54,8 +54,4 @@ export class CompetitionStandingsComponent implements OnInit {
         })
     }
   }
-
-  // async fetchStandingAsync(competitonId: number): Promise<CompetitionStandingsResponse> {
-  //   return this._http.get<CompetitionStandingsResponse>(`http://localhost:3000/api/v1/competitions/${competitonId}/standings`);
-  // }
 }
