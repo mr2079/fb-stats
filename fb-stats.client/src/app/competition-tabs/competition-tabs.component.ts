@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, first, map, Observable, Observer } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AsyncPipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -13,6 +13,7 @@ import { CompetitionStandingsComponent } from "../competition-standings/competit
 @Component({
   selector: 'competition-tabs',
   templateUrl: 'competition-tabs.component.html',
+  styleUrl: 'competition-tabs.component.css',
   imports: [MatTabsModule, AsyncPipe, MatProgressBarModule, CompetitionStandingsComponent],
 })
 export class CompetitionTabsComponent implements OnInit {

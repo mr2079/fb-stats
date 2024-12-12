@@ -1,13 +1,14 @@
-@if ((competitionTabs | async) === null) 
-{
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
-
-<mat-tab-group dir="rtl">
-  @for (tab of competitionTabs | async; track tab) {
-  <mat-tab>
-    <ng-template mat-tab-label>{{ tab.label }}</ng-template>
-    <app-competition-standings [competitionId]="tab.id"/>
-  </mat-tab>
+<div class="tabs-container">
+  @if ((competitionTabs | async) === null) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
-</mat-tab-group>
+
+  <mat-tab-group dir="rtl">
+    @for (tab of competitionTabs | async; track tab) {
+    <mat-tab>
+      <ng-template mat-tab-label>{{ tab.label }}</ng-template>
+      <app-competition-standings [competitionId]="tab.id" />
+    </mat-tab>
+    }
+  </mat-tab-group>
+</div>

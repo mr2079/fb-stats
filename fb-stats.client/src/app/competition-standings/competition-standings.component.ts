@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class PeriodicElement {
   constructor(
+    public logo: string,
     public rank: number,
     public title: string,
     public score: number,
@@ -40,6 +41,7 @@ export class CompetitionStandingsComponent implements OnInit {
             this.standingTable.next(
               standings!.map(s => 
                 new PeriodicElement(
+                  s.team.thumbnail,
                   s.rank,
                   s.team.title,
                   s.score,
