@@ -77,7 +77,7 @@ export default class CompetitionController {
                             st.played_matches,
                             st.won_matches,
                             st.lost_matches,
-                            st.score,
+                            st.scored_goals,
                             st.conceded_goals,
                             st.red_cards,
                             st.yellow_cards,

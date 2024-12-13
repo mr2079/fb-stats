@@ -13,7 +13,9 @@ export class PeriodicElement {
     public playedMatches: number,
     public wonMatches: number,
     public lostMatches: number,
-    public goalDifference: number
+    public goalDifference: number,
+    public drawMatches: number,
+    public goals: string,
   ) { }
 }
 
@@ -24,7 +26,7 @@ export class PeriodicElement {
   styleUrl: './competition-standings.component.css'
 })
 export class CompetitionStandingsComponent implements OnInit {
-  displayedColumns: string[] = ['rank', 'title', 'playedMatches', 'wonMatches', 'lostMatches', 'goalDifference', 'score'];
+  displayedColumns: string[] = ['rank', 'title', 'playedMatches', 'wonMatches', 'drawMatches', 'lostMatches', 'goalDifference', 'goals', 'score'];
   standingTable = new BehaviorSubject<PeriodicElement[]>([]);
 
   constructor(
@@ -48,7 +50,9 @@ export class CompetitionStandingsComponent implements OnInit {
                   s.playedMatches,
                   s.wonMatches,
                   s.lostMatches,
-                  s.goalDifference    
+                  s.goalDifference,
+                  s.playedMatches - s.wonMatches - s.lostMatches,
+                  `${s.concededGoals}-${s.scoredGoals}`
                 )
               )
             );
