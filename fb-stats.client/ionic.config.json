@@ -1,0 +1,7 @@
+{
+  "name": "fb-stats.client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
