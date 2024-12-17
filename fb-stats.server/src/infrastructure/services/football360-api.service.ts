@@ -5,7 +5,7 @@ import CompetitionItems from "../models/competition-items.interface";
 import CompetitionStandings from "../models/competition-standings.interface";
 import { firstValueFrom } from 'rxjs';
 
-@Injectable({scope: Scope.REQUEST})
+@Injectable()
 export default class Football360ApiService {
     private readonly _baseUrl: string = "https://football360.ir";
 

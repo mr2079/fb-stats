@@ -30,7 +30,7 @@ export default class CompetitionController {
         return this._queryBus.execute(new CompetitionQuery(id));
     }
 
-    @Get(":id/standings")
+    @Get(":id/standing")
     @ApiParam({
         name: "id",
         type: "number"
