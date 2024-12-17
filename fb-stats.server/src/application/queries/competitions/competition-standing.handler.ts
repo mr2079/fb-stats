@@ -31,7 +31,7 @@ export default class CompetitionStandingQueryHandler implements IQueryHandler<Co
             }
         })
         .then(({ fetchId }) => {
-            return this._apiService.getCompetitionStandingsAsync(fetchId)
+            return this._apiService.getCompetitionStandingAsync(fetchId)
                 .then(competitionStandings => {
                     const standings = 
                         competitionStandings

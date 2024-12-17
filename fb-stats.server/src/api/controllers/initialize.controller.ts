@@ -32,7 +32,7 @@ export default class InitializeController {
             });
             this._competitionRepository.save(competition)
                 .then(async (competition: Competition) => {
-                    const competitionStandings = await this._apiService.getCompetitionStandingsAsync(competition.fetchId);
+                    const competitionStandings = await this._apiService.getCompetitionStandingAsync(competition.fetchId);
                     const teams = competitionStandings
                         .competition_trend_stages[0]
                         .standing_table.map(st => {
