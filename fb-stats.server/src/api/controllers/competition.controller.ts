@@ -5,11 +5,15 @@ import IResponse from "src/application/models/dtos/responses/response.interface"
 import { CompetitionListQuery } from "src/application/queries/competitions/competition-list.handler";
 import { CompetitionStandingQuery } from "src/application/queries/competitions/competition-standing.handler";
 import { CompetitionQuery } from "src/application/queries/competitions/competition.handler";
+import Football360ApiService from "src/infrastructure/services/football360-api.service";
+import { DataSource } from "typeorm";
 
 @Controller("api/v1/competitions")
 export default class CompetitionController {
     constructor(
-        private readonly _queryBus : QueryBus
+        private readonly _queryBus : QueryBus,
+        private readonly _appDataSource: DataSource,
+        private readonly _apiService: Football360ApiService
     ) { }
 
     @Get()
@@ -31,7 +35,7 @@ export default class CompetitionController {
         name: "id",
         type: "number"
     })
-    async fetchStandingAsync(@Param() { id }: { id: number }) : Promise<IResponse> {
+    async fetchStandingsAsync(@Param() { id }: { id: number }) : Promise<IResponse> {
         return this._queryBus.execute(new CompetitionStandingQuery(id));
     }
 }

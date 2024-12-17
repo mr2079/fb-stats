@@ -7,6 +7,7 @@ import { classes } from "@automapper/classes";
 import CompetitionProfile from "./mappings/competition.profile";
 import { InfrastructurModule } from "src/infrastructure/infrastructure.module";
 import CompetitionStandingQueryHandler from "./queries/competitions/competition-standing.handler";
+import TeamMatchesQueryHandler from "./queries/teams/team-matches.handler";
 
 @Module({
     imports: [
@@ -20,7 +21,8 @@ import CompetitionStandingQueryHandler from "./queries/competitions/competition-
         CompetitionProfile,
         CompetitionListQueryHandler,
         CompetitionQueryHandler,
-        CompetitionStandingQueryHandler
+        CompetitionStandingQueryHandler,
+        TeamMatchesQueryHandler
     ],
     exports: [
         CqrsModule,

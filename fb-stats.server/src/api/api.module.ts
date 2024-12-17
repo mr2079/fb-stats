@@ -3,6 +3,7 @@ import InitializeController from "./controllers/initialize.controller";
 import CompetitionController from "./controllers/competition.controller";
 import { ConfigModule } from "@nestjs/config";
 import { ApplicationModule } from "src/application/application.module";
+import TeamController from "./controllers/team.controller";
 
 @Module({
     imports: [
@@ -13,7 +14,8 @@ import { ApplicationModule } from "src/application/application.module";
     ],
     controllers: [
         InitializeController,
-        CompetitionController
+        CompetitionController,
+        TeamController
     ]
 })
 export class ApiModule { }
