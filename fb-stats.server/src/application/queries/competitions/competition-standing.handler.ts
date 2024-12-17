@@ -4,7 +4,7 @@ import { CompetitionErrors } from "src/application/models/errors/competition.err
 import Competition from "src/domain/entities/competition.entity";
 import { DataSource, Repository } from "typeorm";
 import Football360ApiService from "src/infrastructure/services/football360-api.service";
-import CompetitionStandingsResponseDTO, { Country, Standings, Team } from "src/application/models/dtos/responses/competition-standings-response.dto";
+import CompetitionStandingResponseDTO, { Country, Standing, Team } from "src/application/models/dtos/responses/competition-standing-response.dto";
 
 export class CompetitionStandingQuery {
     constructor(
@@ -18,13 +18,13 @@ export default class CompetitionStandingQueryHandler implements IQueryHandler<Co
     private readonly _logger = new Logger();
 
     constructor(
-        private readonly _appDataSource: DataSource,
+        _appDataSource: DataSource,
         private readonly _apiService: Football360ApiService
     ) {
         this._competitionRepository = _appDataSource.getRepository(Competition);
     }
 
-    async execute(query: CompetitionStandingQuery) : Promise<CompetitionStandingsResponseDTO> {
+    async execute(query: CompetitionStandingQuery) : Promise<CompetitionStandingResponseDTO> {
         return this._competitionRepository.findOne({
             where: {
                 id: query.id
@@ -37,7 +37,7 @@ export default class CompetitionStandingQueryHandler implements IQueryHandler<Co
                         competitionStandings
                         .competition_trend_stages[0]
                         .standing_table
-                        .map(st => new Standings(
+                        .map(st => new Standing(
                             new Team(
                                 st.team.id,
                                 st.team.slug,
@@ -61,7 +61,7 @@ export default class CompetitionStandingQueryHandler implements IQueryHandler<Co
                             st.played_matches,
                             st.won_matches,
                             st.lost_matches,
-                            st.score,
+                            st.scored_goals,
                             st.conceded_goals,
                             st.red_cards,
                             st.yellow_cards,
@@ -71,16 +71,16 @@ export default class CompetitionStandingQueryHandler implements IQueryHandler<Co
                             st.rank_change
                         ));
 
-                    return new CompetitionStandingsResponseDTO(true, standings);
+                    return new CompetitionStandingResponseDTO(true, standings);
                 })
                 .catch(err => {
                     this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
-                    return new CompetitionStandingsResponseDTO(false, null, CompetitionErrors.fetchStandingsException);
+                    return new CompetitionStandingResponseDTO(false, null, CompetitionErrors.fetchStandingsException);
                 })
         })
         .catch(err => {
             this._logger.error(`${CompetitionStandingQuery.name} - error : ${err}`);
-            return new CompetitionStandingsResponseDTO(false, null, CompetitionErrors.GetCompetitionException);
+            return new CompetitionStandingResponseDTO(false, null, CompetitionErrors.GetCompetitionException);
         });
     }
 }

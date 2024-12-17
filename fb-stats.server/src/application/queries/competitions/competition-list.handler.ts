@@ -13,7 +13,7 @@ export default class CompetitionListQueryHandler implements IQueryHandler<Compet
     private readonly _logger = new Logger();
 
     constructor(
-        private readonly _appDataSource: DataSource
+        _appDataSource: DataSource
     ) {
         this._competitionRepository = _appDataSource.getRepository(Competition);
     }

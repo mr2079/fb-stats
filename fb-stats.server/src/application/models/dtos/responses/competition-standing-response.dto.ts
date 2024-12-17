@@ -1,16 +1,16 @@
 import ResponseDTO from './response.dto';
 
-export default class CompetitionStandingsResponseDTO extends ResponseDTO {
+export default class CompetitionStandingResponseDTO extends ResponseDTO {
   constructor(
     public success: boolean,
-    public standings?: Standings[],
+    public standing?: Standing[],
     public message?: string,
   ) {
     super(success, message);
   }
 }
 
-export class Standings {
+export class Standing {
   constructor(
     public team: Team,
     public rank: number,
