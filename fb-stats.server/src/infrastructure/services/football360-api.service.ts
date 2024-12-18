@@ -1,5 +1,5 @@
 import { HttpService } from "@nestjs/axios";
-import { Injectable, Scope } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import CompetitionItems from "../models/competition-items.interface";
 import { firstValueFrom } from 'rxjs';
 import CompetitionStanding from '../models/competition-standing.interface';

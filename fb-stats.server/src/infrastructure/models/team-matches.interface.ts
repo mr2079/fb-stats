@@ -1,5 +1,6 @@
 export default interface TeamMatches {
-  last_matches: Match[]
+  last_matches: Match[],
+  next_matches: Match[]
 }
 
 export interface Match {

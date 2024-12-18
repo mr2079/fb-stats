@@ -3,11 +3,18 @@ import ResponseDTO from './response.dto';
 export default class TeamMatchesResponseDTO extends ResponseDTO {
   constructor(
     public success: boolean,
-    public matches?: Match[],
+    public matches?: Matches,
     public message?: string,
   ) {
     super(success, message);
   }
+}
+
+export class Matches {
+  constructor(
+    public lastMatches?: Match[],
+    public nextMatches?: Match[]
+  ) { }
 }
 
 export class Match {
