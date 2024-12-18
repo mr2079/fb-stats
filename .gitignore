@@ -137,8 +137,15 @@ log.txt
 # Ionic
 /.ionic
 /www
+/www/*
+www
+www/*
 /platforms
 /plugins
+/android
+/android/*
+android
+android/*
 
 # Compiled output
 /dist
