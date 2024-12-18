@@ -23,7 +23,9 @@
             <ion-skeleton-text [animated]="true"/>
         </ion-row>
         }
-        <ion-row class="ion-activatable ion-row-body" *ngFor="let standing of data$ | async">
+        <ion-row class="ion-activatable ion-row-body"
+          *ngFor="let standing of data$ | async"
+          (click)="onTeamClick(standing.team.englishName)">
             <ion-ripple-effect/>
             <ion-col class="ion-col-team-rank">{{ standing.rank }}</ion-col>
             <ion-col class="ion-col-team-title">

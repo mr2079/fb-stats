@@ -1,10 +1,15 @@
+import { TeamPageModule } from './team/team.module';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'competitions',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'teams',
+    loadChildren: () => import('./team/team.module').then(m => m.TeamPageModule)
   },
   {
     path: '',

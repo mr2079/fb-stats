@@ -1,0 +1,26 @@
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div id="container">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <!-- @if ((data$ | async)?.length == 0) {
+          <ion-col size="auto" class="ion-col-skeleton" *ngFor="let number of skeletonCols">
+            <ion-skeleton-text [animated]="true"/>
+          </ion-col>
+        } -->
+        <!-- <ion-col size="auto" *ngFor="let competition of data$ | async">
+          <ion-card class="ion-activatable" (click)="onCompetitionClick(competition.id, competition.title)">
+            <ion-ripple-effect/>
+            <img
+              [alt]="competition.name"
+              [src]="competition.logo"
+            />
+            <ion-card-header>
+              <ion-card-title>{{ competition.title }}</ion-card-title>
+              <ion-card-subtitle>{{ competition.name }}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

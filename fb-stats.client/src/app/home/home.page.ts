@@ -29,6 +29,7 @@ export class HomePage implements OnInit {
   }
 
   onCompetitionClick(id: number, title: string) {
-    this.router.navigate([`/competitions/${id}/${title}`])
+    const normalizedTitle = title.split(" ").join("-");
+    this.router.navigate([`/competitions/${id}/${normalizedTitle}`])
   }
 }
