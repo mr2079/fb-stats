@@ -27,7 +27,8 @@ export default class TeamMatchesQueryHandler implements IQueryHandler<TeamMatche
     execute(query: TeamMatchesQuery): Promise<TeamMatchesResponseDTO> {
         const normalizedName = query.name
             .toLowerCase()
-            .replace("-", " ");
+            .split("-")
+            .join(" ");
 
         return this._teamRepository
             .createQueryBuilder("team")
