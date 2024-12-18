@@ -1,25 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> برنامه بازی&hairsp;ها </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding" [fullscreen]="true">
   <div id="container">
-    <ion-grid [fixed]="true">
-      <ion-row>
-        <!-- @if ((data$ | async)?.length == 0) {
-          <ion-col size="auto" class="ion-col-skeleton" *ngFor="let number of skeletonCols">
+    <ion-grid>
+      <!-- @if ((data$ | async)?.length == 0) {
+        <ion-row class="ion-row-skeleton" *ngFor="let number of skeletonRows">
             <ion-skeleton-text [animated]="true"/>
-          </ion-col>
+        </ion-row>
         } -->
-        <!-- <ion-col size="auto" *ngFor="let competition of data$ | async">
-          <ion-card class="ion-activatable" (click)="onCompetitionClick(competition.id, competition.title)">
-            <ion-ripple-effect/>
-            <img
-              [alt]="competition.name"
-              [src]="competition.logo"
-            />
-            <ion-card-header>
-              <ion-card-title>{{ competition.title }}</ion-card-title>
-              <ion-card-subtitle>{{ competition.name }}</ion-card-subtitle>
-            </ion-card-header>
-          </ion-card>
-        </ion-col> -->
+      <ion-row *ngFor="let match of data$ | async">
+        <ion-col>
+          <div style="display: flex; align-items: center; padding: 30px; background-color: rgba(0, 0, 0, .2); border-radius: 6px;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; flex: 2 1;">
+                <span style="margin-left: 10px;">{{ match.homeTeam.title }}</span>
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.homeTeam.englishName"
+                  [src]="match.homeTeam.thumbnail"
+                />
+              </div>
+            <div style="display: flex; flex-direction: column; flex: 1 1; margin: 0 10px;">
+              <span>{{ match.homeScore }} - {{ match.awayScore }}</span>
+              <span>{{ match.statusDetails.title }}</span>
+            </div>
+              <div style="display: flex; align-items: center; justify-content: flex-start; flex: 2 1;">
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.awayTeam.englishName"
+                  [src]="match.awayTeam.thumbnail"
+                />
+                <span style="margin-right: 10px;">{{ match.awayTeam.title }}</span>
+              </div>
+          </div>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </div>
