@@ -1,7 +1,12 @@
 export interface TeamMatchesResponse {
   success: boolean;
-  matches?: Match[];
+  matches?: Matches;
   message?: string;
+}
+
+export interface Matches {
+  lastMatches: Match[];
+  nextMatches: Match[];
 }
 
 export interface Match {

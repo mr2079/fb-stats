@@ -10,9 +10,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['team.page.scss'],
 })
 export class TeamPage implements OnInit {
-  data = new BehaviorSubject<Match[] | null | undefined>([]);
-  data$ = this.data.asObservable();
-  // skeletonCols = Array(8).fill(0).map((_, index) => index);
+  lastMatches = new BehaviorSubject<Match[] | null | undefined>([]);
+  nextMatches = new BehaviorSubject<Match[] | null | undefined>([]);
+  lastMatches$ = this.lastMatches.asObservable();
+  nextMatches$ = this.nextMatches.asObservable();
+  skeletonRows = Array(5).fill(0).map((_, index) => index);
 
   constructor(
     private readonly http: HttpClient,
@@ -24,7 +26,8 @@ export class TeamPage implements OnInit {
     this.http.get<TeamMatchesResponse>(`http://localhost:3000/api/v1/teams/${name}/matches`)
       .subscribe({
         next: ({matches}) => {
-          this.data.next(matches);
+          this.lastMatches.next(matches?.lastMatches);
+          this.nextMatches.next(matches?.nextMatches);
         }
       })
   }

@@ -7,36 +7,168 @@
 <ion-content class="ion-padding" [fullscreen]="true">
   <div id="container">
     <ion-grid>
-      <!-- @if ((data$ | async)?.length == 0) {
-        <ion-row class="ion-row-skeleton" *ngFor="let number of skeletonRows">
-            <ion-skeleton-text [animated]="true"/>
-        </ion-row>
-        } -->
-      <ion-row *ngFor="let match of data$ | async">
+      <ion-row
+        style="
+          margin: 20px 5px 0 5px;
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 10px 0;
+          border-radius: 6px;
+        "
+      >
         <ion-col>
-          <div style="display: flex; align-items: center; padding: 30px; background-color: rgba(0, 0, 0, .2); border-radius: 6px;">
-              <div style="display: flex; align-items: center; justify-content: flex-end; flex: 2 1;">
-                <span style="margin-left: 10px;">{{ match.homeTeam.title }}</span>
-                <img
-                  width="30"
-                  height="30"
-                  [alt]="match.homeTeam.englishName"
-                  [src]="match.homeTeam.thumbnail"
-                />
-              </div>
-            <div style="display: flex; flex-direction: column; flex: 1 1; margin: 0 10px;">
+          <ion-text> بازی&hairsp;های بعدی </ion-text>
+        </ion-col>
+      </ion-row>
+      @if ((nextMatches$ | async)?.length == 0) {
+      <ion-row *ngFor="let match of skeletonRows">
+        <ion-col>
+          <ion-skeleton-text
+            [animated]="true"
+            style="
+              height: 110px;
+              border-radius: 6px;
+            "
+          />
+        </ion-col>
+      </ion-row>
+      }
+      <ion-row *ngFor="let match of nextMatches$ | async">
+        <ion-col>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              padding: 30px;
+              background-color: rgba(0, 0, 0, 0.2);
+              border-radius: 6px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex: 2 1;
+              "
+            >
+              <span style="margin-left: 10px">{{ match.homeTeam.title }}</span>
+              <img
+                width="30"
+                height="30"
+                [alt]="match.homeTeam.englishName"
+                [src]="match.homeTeam.thumbnail"
+              />
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                flex: 1 1;
+                margin: 0 10px;
+              "
+            >
               <span>{{ match.homeScore }} - {{ match.awayScore }}</span>
               <span>{{ match.statusDetails.title }}</span>
             </div>
-              <div style="display: flex; align-items: center; justify-content: flex-start; flex: 2 1;">
-                <img
-                  width="30"
-                  height="30"
-                  [alt]="match.awayTeam.englishName"
-                  [src]="match.awayTeam.thumbnail"
-                />
-                <span style="margin-right: 10px;">{{ match.awayTeam.title }}</span>
-              </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex: 2 1;
+              "
+            >
+              <img
+                width="30"
+                height="30"
+                [alt]="match.awayTeam.englishName"
+                [src]="match.awayTeam.thumbnail"
+              />
+              <span style="margin-right: 10px">{{ match.awayTeam.title }}</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row
+        style="
+          margin: 20px 5px 0 5px;
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 10px 0;
+          border-radius: 6px;
+        "
+      >
+        <ion-col>
+          <ion-text> بازی&hairsp;های قبلی </ion-text>
+        </ion-col>
+      </ion-row>
+      @if ((lastMatches | async)?.length == 0) {
+        <ion-row *ngFor="let match of skeletonRows">
+          <ion-col>
+            <ion-skeleton-text
+              [animated]="true"
+              style="
+                height: 110px;
+                border-radius: 6px;
+              "
+            />
+          </ion-col>
+        </ion-row>
+        }
+      <ion-row *ngFor="let match of lastMatches$ | async">
+        <ion-col>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              padding: 30px;
+              background-color: rgba(0, 0, 0, 0.2);
+              border-radius: 6px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex: 2 1;
+              "
+            >
+              <span style="margin-left: 10px">{{ match.homeTeam.title }}</span>
+              <img
+                width="30"
+                height="30"
+                [alt]="match.homeTeam.englishName"
+                [src]="match.homeTeam.thumbnail"
+              />
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                flex: 1 1;
+                margin: 0 10px;
+              "
+            >
+              <span>{{ match.homeScore }} - {{ match.awayScore }}</span>
+              <span>{{ match.statusDetails.title }}</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex: 2 1;
+              "
+            >
+              <img
+                width="30"
+                height="30"
+                [alt]="match.awayTeam.englishName"
+                [src]="match.awayTeam.thumbnail"
+              />
+              <span style="margin-right: 10px">{{ match.awayTeam.title }}</span>
+            </div>
           </div>
         </ion-col>
       </ion-row>
