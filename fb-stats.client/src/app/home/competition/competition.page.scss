@@ -1,0 +1,59 @@
+#container {
+  margin: 0 auto;
+  max-width: 1400px;
+  min-width: 1200px;
+}
+
+ion-grid ion-row ion-col {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-grid .ion-row-header {
+  margin: 20px 0;
+}
+
+ion-grid .ion-row-body {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 20px 0;
+  background-color: rgba(0, 0, 0, .2);
+  border-radius: 6px;
+}
+
+ion-grid ion-row .ion-col-header {
+  background-color: rgba(0, 0, 0, .5);
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 6px;
+}
+
+ion-grid ion-row .ion-col-team-title {
+  justify-content: start;
+  flex-grow: 1;
+}
+
+ion-grid ion-row .ion-col-header,
+ion-grid ion-row .ion-col-team-rank,
+ion-grid ion-row .ion-col-team-score {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+ion-grid ion-row .ion-col-team-title .ion-col-team-title-container {
+  display: flex;
+  align-items: center;
+}
+
+ion-grid ion-row .ion-col-team-title .ion-col-team-title-container img {
+  width: 30px;
+  height: 30px;
+}
+
+ion-grid ion-row .ion-col-team-title .ion-col-team-title-container span {
+  margin-right: 10px;
+}

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Competition, CompetitionListResponse } from './competition-list.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomePage implements OnInit {
   data$ = this.data.asObservable();
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -23,5 +25,9 @@ export class HomePage implements OnInit {
           this.data.next(competitions);
         }
       })
+  }
+
+  onCompetitionClick(id: number, title: string) {
+    this.router.navigate([`/competitions/${id}/${title}`])
   }
 }

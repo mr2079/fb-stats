@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { provideHttpClient } from '@angular/common/http';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { CompetitionPage } from './competition/competition.page';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, CompetitionPage],
   providers: [
     provideHttpClient()
   ]
