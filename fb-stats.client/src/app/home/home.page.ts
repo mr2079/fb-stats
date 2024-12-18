@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   data = new BehaviorSubject<Competition[] | null | undefined>([]);
   data$ = this.data.asObservable();
+  skeletonCols = Array(8).fill(0).map((_, index) => index);
 
   constructor(
     private readonly http: HttpClient,

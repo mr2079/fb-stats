@@ -8,16 +8,21 @@
   <div id="container">
     <ion-grid>
         <ion-row class="ion-row-header">
-                <ion-col></ion-col>
-                <ion-col></ion-col>
-                <ion-col class="ion-col-header">بازی</ion-col>
-                <ion-col class="ion-col-header">برد</ion-col>
-                <ion-col class="ion-col-header">مساوی</ion-col>
-                <ion-col class="ion-col-header">باخت</ion-col>
-                <ion-col class="ion-col-header">تفاضل</ion-col>
-                <ion-col class="ion-col-header">+|-</ion-col>
-                <ion-col class="ion-col-header">امتیاز</ion-col>
-          </ion-row>
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+            <ion-col class="ion-col-header">بازی</ion-col>
+            <ion-col class="ion-col-header">برد</ion-col>
+            <ion-col class="ion-col-header">مساوی</ion-col>
+            <ion-col class="ion-col-header">باخت</ion-col>
+            <ion-col class="ion-col-header">تفاضل</ion-col>
+            <ion-col class="ion-col-header">+|-</ion-col>
+            <ion-col class="ion-col-header">امتیاز</ion-col>
+        </ion-row>
+        @if ((data$ | async)?.length == 0) {
+        <ion-row class="ion-row-skeleton" *ngFor="let number of skeletonRows">
+            <ion-skeleton-text [animated]="true"/>
+        </ion-row>
+        }
         <ion-row class="ion-activatable ion-row-body" *ngFor="let standing of data$ | async">
             <ion-ripple-effect/>
             <ion-col class="ion-col-team-rank">{{ standing.rank }}</ion-col>

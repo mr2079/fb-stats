@@ -15,14 +15,22 @@ ion-grid .ion-row-header {
   margin: 20px 0;
 }
 
+ion-grid .ion-row-skeleton,
+ion-grid .ion-row-body {
+  overflow: hidden;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+ion-grid .ion-row-skeleton ion-skeleton-text {
+  height: 80px;
+}
+
 ion-grid .ion-row-body {
   position: relative;
-  overflow: hidden;
   cursor: pointer;
-  margin: 10px 0;
   padding: 20px 0;
   background-color: rgba(0, 0, 0, .2);
-  border-radius: 6px;
 }
 
 ion-grid ion-row .ion-col-header {

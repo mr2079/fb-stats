@@ -16,6 +16,7 @@ export class CompetitionPage implements OnInit {
   data = new BehaviorSubject<Standing[] | null | undefined>([]);
   data$ = this.data.asObservable();
   header: string | null = this.route.snapshot.params['title'];
+  skeletonRows = Array(16).fill(0).map((_, index) => index);
 
   constructor(
     private readonly route: ActivatedRoute,
