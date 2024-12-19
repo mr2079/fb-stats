@@ -12,7 +12,7 @@
     <ion-grid>
       <ion-row
         style="
-          margin: 20px 5px 0 5px;
+          margin: 5px;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 10px 0;
           border-radius: 6px;
@@ -27,10 +27,7 @@
         <ion-col>
           <ion-skeleton-text
             [animated]="true"
-            style="
-              height: 110px;
-              border-radius: 6px;
-            "
+            style="height: 110px; border-radius: 6px"
           />
         </ion-col>
       </ion-row>
@@ -50,17 +47,24 @@
               style="
                 display: flex;
                 align-items: center;
-                justify-content: flex-end;
+                justify-content: space-between;
                 flex: 2 1;
               "
             >
-              <span style="margin-left: 10px">{{ match.homeTeam.title }}</span>
-              <img
-                width="30"
-                height="30"
-                [alt]="match.homeTeam.englishName"
-                [src]="match.homeTeam.thumbnail"
-              />
+              <span style="color: #ddd; font-size: 14px">
+                {{ toPersianDate(match.startedAt) }}
+              </span>
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px"
+                  >{{ match.homeTeam.title }}</span
+                >
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.homeTeam.englishName"
+                  [src]="match.homeTeam.thumbnail"
+                />
+              </div>
             </div>
             <div
               style="
@@ -70,24 +74,27 @@
                 margin: 0 10px;
               "
             >
-              <span>{{ match.homeScore }} - {{ match.awayScore }}</span>
-              <span>{{ match.statusDetails.title }}</span>
+              <span>{{ toShortTime(match.startedAt) }}</span>
             </div>
             <div
               style="
                 display: flex;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: space-between;
                 flex: 2 1;
               "
             >
-              <img
-                width="30"
-                height="30"
-                [alt]="match.awayTeam.englishName"
-                [src]="match.awayTeam.thumbnail"
-              />
-              <span style="margin-right: 10px">{{ match.awayTeam.title }}</span>
+              <div style="display: flex; align-items: center">
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.awayTeam.englishName"
+                  [src]="match.awayTeam.thumbnail"
+                />
+                <span style="margin-right: 10px"
+                  >{{ match.awayTeam.title }}</span
+                >
+              </div>
             </div>
           </div>
         </ion-col>
@@ -95,7 +102,7 @@
 
       <ion-row
         style="
-          margin: 20px 5px 0 5px;
+          margin: 5px;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 10px 0;
           border-radius: 6px;
@@ -106,18 +113,15 @@
         </ion-col>
       </ion-row>
       @if ((lastMatches | async)?.length == 0) {
-        <ion-row *ngFor="let match of skeletonRows">
-          <ion-col>
-            <ion-skeleton-text
-              [animated]="true"
-              style="
-                height: 110px;
-                border-radius: 6px;
-              "
-            />
-          </ion-col>
-        </ion-row>
-        }
+      <ion-row *ngFor="let match of skeletonRows">
+        <ion-col>
+          <ion-skeleton-text
+            [animated]="true"
+            style="height: 110px; border-radius: 6px"
+          />
+        </ion-col>
+      </ion-row>
+      }
       <ion-row *ngFor="let match of lastMatches$ | async">
         <ion-col>
           <div
@@ -133,17 +137,24 @@
               style="
                 display: flex;
                 align-items: center;
-                justify-content: flex-end;
+                justify-content: space-between;
                 flex: 2 1;
               "
             >
-              <span style="margin-left: 10px">{{ match.homeTeam.title }}</span>
-              <img
-                width="30"
-                height="30"
-                [alt]="match.homeTeam.englishName"
-                [src]="match.homeTeam.thumbnail"
-              />
+              <span style="color: #ddd; font-size: 14px">
+                {{ toPersianDate(match.startedAt) }}
+              </span>
+              <div style="display: flex; align-items: center">
+                <span style="margin-left: 10px"
+                  >{{ match.homeTeam.title }}</span
+                >
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.homeTeam.englishName"
+                  [src]="match.homeTeam.thumbnail"
+                />
+              </div>
             </div>
             <div
               style="
@@ -154,23 +165,29 @@
               "
             >
               <span>{{ match.homeScore }} - {{ match.awayScore }}</span>
-              <span>{{ match.statusDetails.title }}</span>
+              <span style="color: #ddd; font-size: 12px"
+                >{{ match.statusDetails.title }}</span
+              >
             </div>
             <div
               style="
                 display: flex;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: space-between;
                 flex: 2 1;
               "
             >
-              <img
-                width="30"
-                height="30"
-                [alt]="match.awayTeam.englishName"
-                [src]="match.awayTeam.thumbnail"
-              />
-              <span style="margin-right: 10px">{{ match.awayTeam.title }}</span>
+              <div style="display: flex; align-items: center">
+                <img
+                  width="30"
+                  height="30"
+                  [alt]="match.awayTeam.englishName"
+                  [src]="match.awayTeam.thumbnail"
+                />
+                <span style="margin-right: 10px"
+                  >{{ match.awayTeam.title }}</span
+                >
+              </div>
             </div>
           </div>
         </ion-col>

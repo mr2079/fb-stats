@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Match, TeamMatchesResponse } from './team-matches.interface';
 import { ActivatedRoute } from '@angular/router';
+import UtilService from '../util.service';
 
 @Component({
   selector: 'app-team',
@@ -18,7 +19,8 @@ export class TeamPage implements OnInit {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly route: ActivatedRoute 
+    private readonly route: ActivatedRoute,
+    private readonly utilService: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +32,13 @@ export class TeamPage implements OnInit {
           this.nextMatches.next(matches?.nextMatches);
         }
       })
+  }
+
+  toShortTime(timestamp: number) : string {
+    return this.utilService.toShortTime(timestamp);
+  }
+
+  toPersianDate(timestamp: number) : string {
+    return this.utilService.toPersianDate(timestamp);
   }
 }

@@ -20,8 +20,29 @@
   --ion-item-background: #1c1c1d;
 }
 
-* {
-  font-family: "Vazirmatn", serif;
+@font-face {
+  font-family: "Shabnam";
+  src: url("../assets/fonts/Shabnam-FD.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("../assets/fonts/Shabnam-Light-FD.ttf") format("truetype");
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("../assets/fonts/Shabnam-Bold-FD.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+*, body {
+  font-family: "Shabnam", serif;
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
