@@ -4,12 +4,12 @@ import { DataSource } from "typeorm";
 import { UpdateSchema1733919538853 } from "../migrations/1733919538853-UpdateSchema";
 
 const appDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "postgres",
-    database: "fb_stats",
+    type: "sqlite",
+    // host: "localhost",
+    // port: 5432,
+    // username: "postgres",
+    // password: "postgres",
+    database: "fbstats.db",
     synchronize: true,
     entities: [
         Competition,

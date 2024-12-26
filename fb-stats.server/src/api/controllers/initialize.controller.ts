@@ -20,7 +20,7 @@ export default class InitializeController {
     @Get()
     async initAsync() : Promise<void> {
         const existedCompetitions = await this._competitionRepository.find();
-        if (existedCompetitions) return;
+        if (existedCompetitions?.length > 0) return;
         
         const competitionItems = await this._apiService.getCompetitionItemsAsync();
         competitionItems.data.forEach(item => {

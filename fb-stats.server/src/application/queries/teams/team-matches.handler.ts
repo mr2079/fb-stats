@@ -4,7 +4,7 @@ import TeamMatchesResponseDTO, { Country, Match, Matches, Team as MatchTeam, Rou
 import { TeamErrors } from "src/application/models/errors/team.error";
 import Team from "src/domain/entities/team.entity";
 import Football360ApiService from "src/infrastructure/services/football360-api.service";
-import { DataSource, Repository } from "typeorm";
+import { DataSource, ILike, Repository } from "typeorm";
 
 export class TeamMatchesQuery {
     constructor(
@@ -30,10 +30,11 @@ export default class TeamMatchesQueryHandler implements IQueryHandler<TeamMatche
             .split("-")
             .join(" ");
 
-        return this._teamRepository
-            .createQueryBuilder("team")
-            .where("team.name ILIKE :name", { name:`%${normalizedName}%` })
-            .getMany()
+            return this._teamRepository.find({
+                where: {
+                   name : ILike(`%${normalizedName}%`) 
+                }
+            })
             .then((teams: Team[]) => {
                 return this._apiService.getTeamMatchesAsync(teams[0].fetchId)
                     .then(tm => {
